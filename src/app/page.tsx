@@ -1,4 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
+
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1600&auto=format&fit=crop&q=80";
+const TRAINER_IMAGE =
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80";
+const ARTIFACT_IMAGE =
+  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&auto=format&fit=crop&q=80";
+const TESTIMONIAL_AVATAR =
+  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&auto=format&fit=crop&q=80";
 
 const NAMED_CUSTOMERS = "3 zorginstellingen · 2 accountantskantoren · 4 SaaS-bedrijven";
 
@@ -224,14 +234,14 @@ export default function Page() {
       </header>
 
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-[var(--color-border)] mesh-bg">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-12 md:py-32">
+      <section className="relative overflow-hidden border-b border-[var(--color-border)]">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-12 md:py-28">
           <div className="md:col-span-7">
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent-ring)] bg-[var(--color-accent-soft)] px-3 py-1 text-xs font-medium text-[var(--color-accent)]">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
               Vóór 2 augustus 2026 compliant
             </span>
-            <h1 className="font-display mt-8 text-[clamp(2.75rem,6vw,4.75rem)] font-semibold leading-[1.02] tracking-tight">
+            <h1 className="font-display mt-8 text-[clamp(2.5rem,5.5vw,4.5rem)] font-semibold leading-[1.04] tracking-tight">
               AI-verordening workshop voor het MKB.
               <br />
               <span className="text-[var(--color-ink-muted)]">
@@ -263,79 +273,24 @@ export default function Page() {
             <p className="mt-3 text-sm text-[var(--color-ink-muted)]">{NAMED_CUSTOMERS}</p>
           </div>
 
-          {/* Hero artifact: AI-register sample */}
+          {/* Hero photo */}
           <div className="relative md:col-span-5">
-            <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-[var(--color-accent-soft)] blur-3xl opacity-60" />
-            <div className="overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-white shadow-[var(--shadow-elev)]">
-              <div className="flex items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-5 py-3">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-[var(--color-ink-soft)]" />
-                  <span className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)]">
-                    AI-register · uittreksel
-                  </span>
-                </div>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-ink-soft)]">
-                  v1.0
-                </span>
-              </div>
-              <div className="divide-y divide-[var(--color-border)]">
-                {[
-                  {
-                    tool: "ChatGPT Enterprise",
-                    use: "E-mail · documentdraft",
-                    risk: "Beperkt",
-                    tone: "bg-amber-50 text-amber-800 border-amber-200",
-                  },
-                  {
-                    tool: "Recruitee CV-AI",
-                    use: "CV-screening",
-                    risk: "Hoog",
-                    tone: "bg-rose-50 text-rose-800 border-rose-200",
-                  },
-                  {
-                    tool: "MS Copilot",
-                    use: "Word · Outlook · Excel",
-                    risk: "Beperkt",
-                    tone: "bg-amber-50 text-amber-800 border-amber-200",
-                  },
-                  {
-                    tool: "Intercom Fin",
-                    use: "Klantenservice chatbot",
-                    risk: "Beperkt",
-                    tone: "bg-amber-50 text-amber-800 border-amber-200",
-                  },
-                  {
-                    tool: "Bryq",
-                    use: "Persoonlijkheidstest",
-                    risk: "Hoog",
-                    tone: "bg-rose-50 text-rose-800 border-rose-200",
-                  },
-                ].map((row) => (
-                  <div
-                    key={row.tool}
-                    className="grid grid-cols-12 items-center gap-3 px-5 py-3.5 text-sm"
-                  >
-                    <span className="col-span-5 font-medium text-[var(--color-ink)]">
-                      {row.tool}
-                    </span>
-                    <span className="col-span-4 text-[var(--color-ink-muted)]">{row.use}</span>
-                    <span className="col-span-3 flex justify-end">
-                      <span
-                        className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium ${row.tone}`}
-                      >
-                        {row.risk}
-                      </span>
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center justify-between border-t border-[var(--color-border)] bg-[var(--color-surface-2)] px-5 py-3">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-ink-soft)]">
-                  + 7 systemen
-                </span>
-                <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-accent)]">
-                  classificatie compleet
-                </span>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-surface-2)] shadow-[var(--shadow-elev)]">
+              <Image
+                src={HERO_IMAGE}
+                alt="In-company AI-verordening workshop met een MKB-team rond een tafel"
+                fill
+                priority
+                sizes="(min-width: 768px) 42vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent p-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/70">
+                  In-company sessie
+                </p>
+                <p className="mt-1 font-display text-lg font-medium text-white">
+                  Bestuur · HR · IT aan één tafel.
+                </p>
               </div>
             </div>
           </div>
@@ -370,6 +325,65 @@ export default function Page() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TRAINER */}
+      <section className="border-b border-[var(--color-border)] bg-[var(--color-canvas)]">
+        <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-surface-2)] shadow-[var(--shadow-card)]">
+              <Image
+                src={TRAINER_IMAGE}
+                alt="De docent — Ibrahim Ben Moussa"
+                fill
+                sizes="(min-width: 768px) 36vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+          <div className="md:col-span-7">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
+              De docent
+            </p>
+            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+              Een dag met iemand die het{" "}
+              <span className="font-serif-italic">bouwt,</span> niet alleen begrijpt.
+            </h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+              Ibrahim Ben Moussa adviseert MKB-bedrijven over AI-implementatie en
+              externe security. Hij bouwt zelf AI-tools en kent de praktische kant van
+              wat de AI-verordening voor uw werkprocessen betekent — niet alleen wat de
+              richtlijn op papier zegt.
+            </p>
+            <p className="mt-4 text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+              Op één werkdag zit hij naast uw team aan tafel. Geen powerpoint-cursus,
+              maar een werkende sessie waarin uw eigen AI-register, classificatie en
+              actieplan worden opgebouwd op basis van uw echte situatie.
+            </p>
+            <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-[var(--color-border)] pt-8">
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  Achtergrond
+                </dt>
+                <dd className="mt-2 font-display text-base font-medium">
+                  Cyber &amp; AI
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  KvK
+                </dt>
+                <dd className="mt-2 font-display text-base font-medium">87908727</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  Locatie
+                </dt>
+                <dd className="mt-2 font-display text-base font-medium">Nederland</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>
@@ -463,6 +477,58 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ARTIFACT BAND */}
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-canvas)]">
+        <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
+              Wat u meeneemt
+            </p>
+            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+              Geen sheets. Werkende{" "}
+              <span className="font-serif-italic">documenten.</span>
+            </h2>
+            <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+              Aan het einde van de werkdag heeft u een ingevuld AI-register, een
+              risico-classificatie per systeem en een 30/60/90-dagen plan. Werkende
+              bestanden die u dezelfde week kunt overhandigen aan uw directie of een
+              toezichthouder kunt tonen.
+            </p>
+            <ul className="mt-10 grid gap-x-10 gap-y-3 text-sm text-[var(--color-ink-muted)] sm:grid-cols-2">
+              {[
+                "AI-register · Excel + PDF",
+                "Risico-classificatie matrix",
+                "Beleidsdocument (template)",
+                "Trainingslog (Art. 4)",
+                "Leveranciers-DD checklist",
+                "30/60/90-dagen plan",
+              ].map((it) => (
+                <li key={it} className="flex items-start gap-3">
+                  <span
+                    aria-hidden
+                    className="mt-1 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]"
+                  >
+                    ✓
+                  </span>
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="md:col-span-5">
+            <div className="relative aspect-[5/6] overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-surface-2)] shadow-[var(--shadow-elev)]">
+              <Image
+                src={ARTIFACT_IMAGE}
+                alt="Documenten en notitieboek met AI-register tijdens een workshop"
+                fill
+                sizes="(min-width: 768px) 36vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* DARK PROOF */}
       <section className="border-b border-black bg-[#14110d] text-white">
         <div className="mx-auto max-w-4xl px-6 py-28 text-center">
@@ -475,9 +541,17 @@ export default function Page() {
               één dag hadden we ons register, ons beleid en wisten we welke leveranciers
               we moesten bevragen.&rdquo;
             </p>
-            <footer className="mt-8 flex items-center justify-center gap-4 text-sm text-white/60">
-              <span className="h-9 w-9 rounded-full bg-white/10" />
-              <span>
+            <footer className="mt-10 flex items-center justify-center gap-4 text-sm text-white/60">
+              <span className="relative h-11 w-11 overflow-hidden rounded-full ring-1 ring-white/20">
+                <Image
+                  src={TESTIMONIAL_AVATAR}
+                  alt="Portret van een HR-directeur"
+                  fill
+                  sizes="44px"
+                  className="object-cover"
+                />
+              </span>
+              <span className="text-left">
                 <span className="block font-medium text-white">HR-directeur</span>
                 <span className="block text-white/50">SaaS · 80 medewerkers · Q1 2026</span>
               </span>
