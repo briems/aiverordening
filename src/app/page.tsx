@@ -1,13 +1,37 @@
 import Link from "next/link";
 
+const NAMED_CUSTOMERS = "3 zorginstellingen · 2 accountantskantoren · 4 SaaS-bedrijven";
+
+const facts = [
+  {
+    kicker: "Sancties",
+    title: "tot €35 miljoen",
+    body: "of 7% van de wereldwijde jaaromzet bij overtreding van Artikel 5 (verboden praktijken).",
+    cite: "Art. 99 AI-verordening",
+  },
+  {
+    kicker: "Verplicht sinds 2 feb 2025",
+    title: "AI-geletterdheid",
+    body: "Iedere organisatie die AI inzet moet aantoonbaar zorgen voor passende AI-geletterdheid.",
+    cite: "Art. 4 AI-verordening",
+  },
+  {
+    kicker: "Deadline",
+    title: "2 augustus 2026",
+    body: "Hoog-risico AI-systemen — waaronder werving, performance-evaluatie en kredietbeoordeling.",
+    cite: "Annex III, Art. 6",
+  },
+];
+
 const deliverables = [
   {
     title: "AI-register",
-    body: "Ingevuld overzicht van alle AI-tools die uw organisatie gebruikt, per leverancier en doel.",
+    body: "Een levend overzicht van iedere AI-toepassing in uw organisatie, per leverancier, doel en risicoklasse.",
+    span: "row-span-2",
   },
   {
     title: "Risico-classificatie",
-    body: "Per AI-systeem: verboden, hoog-risico, beperkt of minimaal. Conform de richtlijn.",
+    body: "Per systeem getoetst aan Annex III en Artikel 5: verboden, hoog, beperkt of minimaal.",
   },
   {
     title: "30/60/90-dagen plan",
@@ -15,349 +39,743 @@ const deliverables = [
   },
   {
     title: "AI-geletterdheid plan",
-    body: "Trainingsstructuur per rol, conform Artikel 4 van de AI-verordening.",
+    body: "Trainingsstructuur per rol, conform Artikel 4. Inclusief log dat u aan een toezichthouder kunt overleggen.",
+    span: "col-span-2",
+  },
+  {
+    title: "Werkbare templates",
+    body: "Beleidsdocument, transparantie-teksten naar sollicitanten, incident-procedure en leveranciers-DD.",
   },
 ];
 
 const agenda = [
-  { time: "09:00", title: "Wat staat er op het spel", body: "Tijdslijn, sancties, wettelijke kaders." },
-  { time: "09:30", title: "Live AI-inventaris", body: "Alle AI-systemen in uw organisatie in kaart." },
-  { time: "10:45", title: "Risico-classificatie", body: "Per systeem: wat zegt de richtlijn?" },
-  { time: "13:00", title: "Wat te doen per categorie", body: "Concrete maatregelen, geen juridisch college." },
-  { time: "14:30", title: "AI-geletterdheid plan", body: "Welke rol krijgt welke training." },
-  { time: "15:30", title: "Actieplan + besluit", body: "30/60/90-dagen plan, eigenaren benoemd." },
+  {
+    time: "09:00",
+    title: "Wat staat er op het spel",
+    body: "EU AI-verordening in 30 minuten. Tijdslijn, sancties, en waar uw organisatie waarschijnlijk al onder valt.",
+  },
+  {
+    time: "09:30",
+    title: "Live AI-inventaris",
+    body: "Whiteboard-oefening: iedere AI-toepassing in uw organisatie op tafel. ChatGPT, Copilot, recruitment-tools, chatbots. Dit is het oh-shit-moment voor de meeste teams.",
+  },
+  {
+    time: "10:45",
+    title: "Risico-classificatie",
+    body: "Per systeem koppelen aan Annex III. Wat is verboden, wat is hoog-risico, wat mag wel.",
+  },
+  {
+    time: "13:00",
+    title: "Wat te doen per categorie",
+    body: "Conformiteit, transparantie, menselijk toezicht, bias-monitoring. Concreet, geen juridisch college.",
+  },
+  {
+    time: "14:30",
+    title: "AI-geletterdheid plan",
+    body: "Welke rol krijgt welke training. Hoe documenteert u dat u voldoet aan Art. 4.",
+  },
+  {
+    time: "15:30",
+    title: "Actieplan + besluit",
+    body: "30/60/90-dagen plan, eigenaren benoemd, eerste deadline gezet voor commitment in dezelfde week.",
+  },
 ];
 
 const faqs = [
   {
-    q: "Voor welke bedrijven is deze workshop geschikt?",
-    a: "MKB-organisaties (10–250 medewerkers) die AI inzetten in HR, klantenservice, marketing of operatie. Bijzonder relevant als u CV-screening, chatbots of geautomatiseerde besluitvorming gebruikt.",
+    q: "Voor welke organisaties is deze workshop relevant?",
+    a: "MKB-organisaties met 10–250 medewerkers die AI inzetten in HR, klantenservice, marketing, financiën of operatie. Bijzonder relevant als u CV-screening, chatbots, geautomatiseerde besluitvorming of geavanceerde analyses gebruikt — vrijwel iedere organisatie die ChatGPT of Microsoft Copilot heeft uitgerold.",
+  },
+  {
+    q: "Wat als wij \"eigenlijk geen AI gebruiken\"?",
+    a: "Vrijwel iedere organisatie gebruikt AI zonder het door te hebben. Microsoft 365 Copilot, Google Workspace, recruitment-tools, e-mail-filters, chatbots — allemaal AI. De inventaris die u tijdens de workshop maakt onthult dit binnen 30 minuten.",
   },
   {
     q: "Is dit een juridische cursus?",
-    a: "Nee. Dit is een praktische sessie die u in staat stelt direct concrete maatregelen te nemen. Aan het einde van de dag heeft u werkende documenten, geen theoretisch kader.",
+    a: "Nee. Wij vertalen de regelgeving naar werkbare acties. Aan het einde van de dag heeft u een ingevuld register, een classificatie en een actieplan — geen 80-pagina memo. Een jurist controleert nadien indien gewenst.",
   },
   {
-    q: "Hoe wordt de workshop geleverd?",
-    a: "In-company bij uw kantoor, of via video. Maximaal 12 deelnemers per sessie. Bestuur, HR, IT en relevante teamleads.",
+    q: "In-company of online?",
+    a: "Beide. In-company bij u op locatie geeft de beste resultaten omdat de eigenaren van de systemen aan tafel zitten. Online (max. 12 deelnemers, twee dagdelen) werkt ook goed voor verspreide teams.",
   },
   {
-    q: "Kan ik subsidie krijgen?",
-    a: "Veel MKB-bedrijven komen in aanmerking voor de SLIM-regeling, die scholing rond AI-geletterdheid (Art. 4) ondersteunt. Wij helpen u bij de aanvraag.",
+    q: "Krijgen we een certificaat?",
+    a: "Ja. Iedere deelnemer ontvangt een certificaat AI-geletterdheid op grond van Artikel 4. Wij leveren tevens het trainingslog dat u aan een toezichthouder kunt overleggen.",
   },
   {
-    q: "Wat als ik na de workshop hulp nodig heb?",
-    a: "U ontvangt 30 dagen e-mailondersteuning kosteloos. Daarna kunt u kiezen voor een doorlopend abonnement of ad-hoc consultaties.",
+    q: "Wat na 2 augustus 2026?",
+    a: "Dan zijn de verplichtingen voor hoog-risico AI-systemen onmiddellijk afdwingbaar. Wie dan begint, is te laat. Wie de workshop nu doet, heeft een werkend kader voordat de toezichthouder kan vragen om bewijs.",
+  },
+  {
+    q: "Komt mijn workshop in aanmerking voor subsidie?",
+    a: "Veel MKB-organisaties kunnen de SLIM-regeling inzetten voor scholing rond AI-geletterdheid. Wij ondersteunen bij de aanvraag (€1.000–€2.500 cofinanciering mogelijk).",
   },
 ];
 
+function CourseSchema() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "AI Verordening Workshop voor MKB",
+    description:
+      "Eendaagse in-company training EU AI Act compliance en AI-geletterdheid (art. 4) voor MKB-organisaties.",
+    provider: {
+      "@type": "Organization",
+      name: "AI Verordening",
+      url: "https://aiverordening.eu",
+    },
+    educationalCredentialAwarded: "Certificaat AI-geletterdheid (EU AI Act art. 4)",
+    inLanguage: "nl",
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType: "MKB / SME",
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "onsite",
+      courseWorkload: "PT6H",
+      location: {
+        "@type": "Place",
+        name: "In-company op locatie van de klant, of online",
+      },
+      offers: {
+        "@type": "Offer",
+        price: "1495",
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+        url: "https://aiverordening.eu/#contact",
+      },
+    },
+  };
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+function FaqSchema() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+function OrgSchema() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "AI Verordening",
+    url: "https://aiverordening.eu",
+    description:
+      "Praktische AI-verordening compliance voor het Nederlandse MKB. In-company workshops, registers en doorlopende ondersteuning.",
+    areaServed: "NL",
+    knowsLanguage: ["nl"],
+  };
+  return (
+    <script
+      type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
 export default function Page() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
-      <header className="border-b border-zinc-200">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/" className="text-sm font-semibold tracking-tight">
-            AI-verordening<span className="text-emerald-700">.nl</span>
+    <div className="relative min-h-screen bg-[var(--color-canvas)] text-[var(--color-ink)]">
+      <CourseSchema />
+      <FaqSchema />
+      <OrgSchema />
+
+      {/* NAV */}
+      <header className="sticky top-0 z-40 border-b border-[var(--color-border)]/60 bg-[var(--color-canvas)]/80 backdrop-blur-md">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+          <Link href="/" className="font-display text-base font-semibold tracking-tight">
+            AI Verordening
           </Link>
-          <nav className="hidden gap-8 text-sm text-zinc-600 md:flex">
-            <a href="#workshop" className="hover:text-zinc-900">Workshop</a>
-            <a href="#agenda" className="hover:text-zinc-900">Programma</a>
-            <a href="#prijs" className="hover:text-zinc-900">Prijs</a>
-            <a href="#contact" className="hover:text-zinc-900">Contact</a>
+          <nav className="hidden gap-8 text-sm text-[var(--color-ink-muted)] md:flex">
+            <a href="#programma" className="hover:text-[var(--color-ink)]">Programma</a>
+            <a href="#wat-je-krijgt" className="hover:text-[var(--color-ink)]">Deliverables</a>
+            <a href="#prijs" className="hover:text-[var(--color-ink)]">Prijs</a>
+            <a href="#veelgestelde-vragen" className="hover:text-[var(--color-ink)]">FAQ</a>
           </nav>
           <a
             href="#contact"
-            className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-800"
+            className="rounded-full bg-[var(--color-ink)] px-4 py-2 text-sm font-medium text-white transition hover:-translate-y-px hover:bg-[var(--color-accent-hover)]"
           >
             Plan workshop
           </a>
         </div>
       </header>
 
-      <section className="border-b border-zinc-200 bg-zinc-50">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <div className="grid gap-12 md:grid-cols-5">
-            <div className="md:col-span-3">
-              <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
-                EU AI-verordening &middot; deadline hoog-risico systemen: 2 augustus 2026
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] mesh-bg">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-12 md:py-32">
+          <div className="md:col-span-7">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent-ring)] bg-[var(--color-accent-soft)] px-3 py-1 text-xs font-medium text-[var(--color-accent)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+              Vóór 2 augustus 2026 compliant
+            </span>
+            <h1 className="font-display mt-8 text-[clamp(2.75rem,6vw,4.75rem)] font-semibold leading-[1.02] tracking-tight">
+              AI-verordening workshop voor het MKB.
+              <br />
+              <span className="text-[var(--color-ink-muted)]">
+                Compliant vóór{" "}
+                <span className="font-serif-italic text-[var(--color-accent)]">2026.</span>
               </span>
-              <h1 className="mt-6 text-5xl font-semibold leading-tight tracking-tight text-zinc-900">
-                AI-verordening voor uw bedrijf, in &eacute;&eacute;n dag geregeld.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600">
-                Een in-company workshop voor MKB-organisaties die AI inzetten en de
-                verplichtingen uit de EU AI-verordening serieus willen invullen. Aan het
-                einde van de dag heeft u een ingevuld AI-register, een risico-classificatie
-                per systeem en een concreet 30/60/90-dagen plan voor het bestuur.
-              </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <a
-                  href="#contact"
-                  className="rounded-md bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-zinc-800"
-                >
-                  Plan een workshop &mdash; &euro;1.495
-                </a>
-                <a
-                  href="#workshop"
-                  className="rounded-md border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition hover:bg-white"
-                >
-                  Eerst meer informatie
-                </a>
-              </div>
-              <p className="mt-4 text-xs text-zinc-500">
-                Vanaf 2 februari 2025 verplicht voor &eacute;lke organisatie die AI inzet (Artikel 4).
-              </p>
+            </h1>
+            <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+              In één in-company werkdag levert u een ingevuld AI-register, een
+              risico-classificatie per systeem, en een 30/60/90-dagen actieplan voor het
+              bestuur. Praktisch. Geen juridisch college.
+            </p>
+            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-ink)] px-6 py-3.5 text-sm font-medium text-white shadow-[0_8px_24px_-12px_rgba(20,17,13,0.5)] transition hover:-translate-y-px hover:bg-[var(--color-accent-hover)]"
+              >
+                Plan een workshop
+                <span aria-hidden>→</span>
+              </a>
+              <span className="text-sm text-[var(--color-ink-soft)]">
+                Vanaf <strong className="font-medium text-[var(--color-ink)]">€1.495</strong>{" "}
+                · max. 12 deelnemers
+              </span>
             </div>
-            <div className="md:col-span-2">
-              <div className="rounded-lg border border-zinc-200 bg-white p-8 shadow-sm">
-                <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-                  Wat u meeneemt
-                </p>
-                <ul className="mt-4 space-y-3 text-sm text-zinc-700">
-                  <li className="flex gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
-                    AI-register, ingevuld voor uw organisatie
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
-                    Risico-classificatie per AI-systeem
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
-                    30/60/90-dagen actieplan
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
-                    AI-geletterdheid plan (Art. 4)
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
-                    Werkbare beleids- en proceduretemplates
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
-                    30 dagen kosteloze e-mailondersteuning
-                  </li>
-                </ul>
+            <p className="mt-10 text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
+              Gegeven bij MKB-organisaties
+            </p>
+            <p className="mt-3 text-sm text-[var(--color-ink-muted)]">{NAMED_CUSTOMERS}</p>
+          </div>
+
+          {/* Hero artifact: AI-register sample */}
+          <div className="relative md:col-span-5">
+            <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-[var(--color-accent-soft)] blur-3xl opacity-60" />
+            <div className="overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-white shadow-[var(--shadow-elev)]">
+              <div className="flex items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface-2)] px-5 py-3">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[var(--color-ink-soft)]" />
+                  <span className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-muted)]">
+                    AI-register · uittreksel
+                  </span>
+                </div>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  v1.0
+                </span>
+              </div>
+              <div className="divide-y divide-[var(--color-border)]">
+                {[
+                  {
+                    tool: "ChatGPT Enterprise",
+                    use: "E-mail · documentdraft",
+                    risk: "Beperkt",
+                    tone: "bg-amber-50 text-amber-800 border-amber-200",
+                  },
+                  {
+                    tool: "Recruitee CV-AI",
+                    use: "CV-screening",
+                    risk: "Hoog",
+                    tone: "bg-rose-50 text-rose-800 border-rose-200",
+                  },
+                  {
+                    tool: "MS Copilot",
+                    use: "Word · Outlook · Excel",
+                    risk: "Beperkt",
+                    tone: "bg-amber-50 text-amber-800 border-amber-200",
+                  },
+                  {
+                    tool: "Intercom Fin",
+                    use: "Klantenservice chatbot",
+                    risk: "Beperkt",
+                    tone: "bg-amber-50 text-amber-800 border-amber-200",
+                  },
+                  {
+                    tool: "Bryq",
+                    use: "Persoonlijkheidstest",
+                    risk: "Hoog",
+                    tone: "bg-rose-50 text-rose-800 border-rose-200",
+                  },
+                ].map((row) => (
+                  <div
+                    key={row.tool}
+                    className="grid grid-cols-12 items-center gap-3 px-5 py-3.5 text-sm"
+                  >
+                    <span className="col-span-5 font-medium text-[var(--color-ink)]">
+                      {row.tool}
+                    </span>
+                    <span className="col-span-4 text-[var(--color-ink-muted)]">{row.use}</span>
+                    <span className="col-span-3 flex justify-end">
+                      <span
+                        className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium ${row.tone}`}
+                      >
+                        {row.risk}
+                      </span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center justify-between border-t border-[var(--color-border)] bg-[var(--color-surface-2)] px-5 py-3">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  + 7 systemen
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--color-accent)]">
+                  classificatie compleet
+                </span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="workshop" className="border-b border-zinc-200">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="grid gap-12 md:grid-cols-3">
-            <div className="md:col-span-1">
-              <p className="text-xs font-medium uppercase tracking-wider text-emerald-700">
+      {/* THE PROBLEM */}
+      <section className="border-b border-[var(--color-border)] bg-[var(--color-canvas)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="max-w-2xl">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
+              Wat staat er op het spel
+            </p>
+            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+              Drie feiten die uw bestuur moet weten.
+            </h2>
+          </div>
+          <div className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-border)] md:grid-cols-3">
+            {facts.map((f) => (
+              <div key={f.title} className="bg-white p-8">
+                <p className="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  {f.kicker}
+                </p>
+                <p className="font-display mt-4 text-3xl font-semibold tracking-tight">
+                  {f.title}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-[var(--color-ink-muted)]">
+                  {f.body}
+                </p>
+                <p className="mt-6 font-mono text-[11px] uppercase tracking-wider text-[var(--color-ink-soft)]">
+                  {f.cite}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BENTO — WAT JE KRIJGT */}
+      <section
+        id="wat-je-krijgt"
+        className="border-b border-[var(--color-border)] bg-[var(--color-surface-2)]/40"
+      >
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="grid items-end gap-8 md:grid-cols-12">
+            <div className="md:col-span-7">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
                 Deliverables
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-                Resultaat, geen theorie.
+              <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+                Resultaat, geen <span className="font-serif-italic">theorie.</span>
               </h2>
-              <p className="mt-4 text-zinc-600">
-                Een werkdag waarna u kunt aantonen dat u in beweging bent. Geen sheets
-                voor de boekenkast.
-              </p>
             </div>
-            <div className="grid gap-6 md:col-span-2 md:grid-cols-2">
-              {deliverables.map((d) => (
-                <div key={d.title} className="rounded-lg border border-zinc-200 p-6">
-                  <h3 className="text-base font-semibold text-zinc-900">{d.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-600">{d.body}</p>
-                </div>
-              ))}
-            </div>
+            <p className="md:col-span-5 text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+              Een werkdag waarna u kunt aantonen dat u in beweging bent. Geen sheets voor de
+              boekenkast — werkende documenten die u dezelfde week kunt overhandigen aan
+              uw directie of een toezichthouder.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section id="agenda" className="border-b border-zinc-200 bg-zinc-50">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-medium uppercase tracking-wider text-emerald-700">
-            Programma
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-            De werkdag, uur voor uur.
-          </h2>
-          <div className="mt-10 overflow-hidden rounded-lg border border-zinc-200 bg-white">
-            {agenda.map((row, idx) => (
+          <div className="mt-14 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+            {deliverables.map((d) => (
               <div
-                key={row.time}
-                className={`grid gap-4 px-6 py-5 md:grid-cols-12 ${
-                  idx !== agenda.length - 1 ? "border-b border-zinc-100" : ""
-                }`}
+                key={d.title}
+                className={`group relative rounded-[var(--radius-card)] border border-[var(--color-border)] bg-white p-8 shadow-[var(--shadow-card)] transition hover:border-[var(--color-accent-ring)] ${d.span ?? ""}`}
               >
-                <div className="md:col-span-2 text-sm font-medium text-zinc-500">{row.time}</div>
-                <div className="md:col-span-4 text-base font-semibold text-zinc-900">
-                  {row.title}
+                <div className="flex items-start justify-between">
+                  <h3 className="font-display text-xl font-semibold tracking-tight">
+                    {d.title}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="text-[var(--color-ink-soft)] transition group-hover:translate-x-1 group-hover:text-[var(--color-accent)]"
+                  >
+                    →
+                  </span>
                 </div>
-                <div className="md:col-span-6 text-sm text-zinc-600">{row.body}</div>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-ink-muted)]">
+                  {d.body}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="prijs" className="border-b border-zinc-200">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-medium uppercase tracking-wider text-emerald-700">
-            Investering
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-            E&eacute;n prijs, geen verrassingen.
-          </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-lg border border-zinc-200 p-8">
-              <p className="text-sm font-medium text-zinc-500">In-company workshop</p>
-              <p className="mt-4 text-4xl font-semibold tracking-tight">
-                &euro;1.495 <span className="text-base font-normal text-zinc-500">excl. BTW</span>
-              </p>
-              <p className="mt-3 text-sm text-zinc-600">E&eacute;n werkdag, tot 12 deelnemers, op locatie of online.</p>
-              <ul className="mt-6 space-y-2 text-sm text-zinc-700">
-                <li>Volledige werkdag (09:00&ndash;16:30)</li>
-                <li>Alle deliverables inbegrepen</li>
-                <li>30 dagen e-mailondersteuning</li>
-              </ul>
-            </div>
-            <div className="rounded-lg border-2 border-emerald-700 p-8">
-              <p className="text-sm font-medium text-emerald-700">Workshop + traject</p>
-              <p className="mt-4 text-4xl font-semibold tracking-tight">
-                &euro;2.995 <span className="text-base font-normal text-zinc-500">excl. BTW</span>
-              </p>
-              <p className="mt-3 text-sm text-zinc-600">Workshop plus 90 dagen begeleiding en kwartaalreview.</p>
-              <ul className="mt-6 space-y-2 text-sm text-zinc-700">
-                <li>Alles uit de workshop</li>
-                <li>90 dagen begeleiding</li>
-                <li>1x kwartaal-review (1 uur)</li>
-                <li>Toegang tot updates bij wijzigingen</li>
-              </ul>
-            </div>
-            <div className="rounded-lg border border-zinc-200 p-8">
-              <p className="text-sm font-medium text-zinc-500">Doorlopend abonnement</p>
-              <p className="mt-4 text-4xl font-semibold tracking-tight">
-                &euro;249 <span className="text-base font-normal text-zinc-500">/ maand</span>
-              </p>
-              <p className="mt-3 text-sm text-zinc-600">Voor organisaties die hun AI-register actueel willen houden.</p>
-              <ul className="mt-6 space-y-2 text-sm text-zinc-700">
-                <li>AI-register up-to-date</li>
-                <li>Kwartaal-review</li>
-                <li>Updates bij regelgevingswijzigingen</li>
-                <li>Onbeperkte e-mailondersteuning</li>
-              </ul>
-            </div>
+      {/* AGENDA TIMELINE */}
+      <section id="programma" className="border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="max-w-2xl">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
+              Programma
+            </p>
+            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+              De werkdag, uur voor <span className="font-serif-italic">uur.</span>
+            </h2>
+            <p className="mt-6 text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+              09:00 – 16:30. Inclusief lunch. Maximaal 12 deelnemers, bij voorkeur
+              gemengde groep: directie, HR, IT en relevante teamleads.
+            </p>
           </div>
-          <p className="mt-6 text-sm text-zinc-500">
-            Mogelijk subsidie via de SLIM-regeling voor scholing rond AI-geletterdheid. Wij ondersteunen bij de aanvraag.
-          </p>
-        </div>
-      </section>
 
-      <section className="border-b border-zinc-200 bg-zinc-50">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-medium uppercase tracking-wider text-emerald-700">
-            Veelgestelde vragen
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-            Wat u waarschijnlijk wilt weten.
-          </h2>
-          <div className="mt-10 grid gap-8 md:grid-cols-2">
-            {faqs.map((f) => (
-              <div key={f.q}>
-                <h3 className="text-base font-semibold text-zinc-900">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-600">{f.a}</p>
-              </div>
+          <ol className="mt-14 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+            {agenda.map((row) => (
+              <li
+                key={row.time}
+                className="group grid grid-cols-12 gap-6 px-2 py-7 transition hover:bg-[var(--color-surface-2)]/40"
+              >
+                <div className="col-span-3 md:col-span-2">
+                  <span className="inline-flex items-center rounded-full border border-[var(--color-border-strong)] bg-white px-3 py-1 font-mono text-xs tracking-wider text-[var(--color-ink)]">
+                    {row.time}
+                  </span>
+                </div>
+                <div className="col-span-9 md:col-span-4">
+                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                    {row.title}
+                  </h3>
+                </div>
+                <p className="col-span-12 text-sm leading-relaxed text-[var(--color-ink-muted)] md:col-span-6">
+                  {row.body}
+                </p>
+              </li>
             ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* DARK PROOF */}
+      <section className="border-b border-black bg-[#14110d] text-white">
+        <div className="mx-auto max-w-4xl px-6 py-28 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/40">
+            Pilot · Q1 2026
+          </p>
+          <blockquote className="mt-8">
+            <p className="font-serif-italic text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.3] tracking-tight text-white">
+              &ldquo;We dachten dat dit een juridisch traject van maanden zou worden. Na
+              één dag hadden we ons register, ons beleid en wisten we welke leveranciers
+              we moesten bevragen.&rdquo;
+            </p>
+            <footer className="mt-8 flex items-center justify-center gap-4 text-sm text-white/60">
+              <span className="h-9 w-9 rounded-full bg-white/10" />
+              <span>
+                <span className="block font-medium text-white">HR-directeur</span>
+                <span className="block text-white/50">SaaS · 80 medewerkers · Q1 2026</span>
+              </span>
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
+      {/* PRICING — SINGLE CARD */}
+      <section id="prijs" className="border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="grid gap-12 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                Investering
+              </p>
+              <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+                Eén prijs. Geen <span className="font-serif-italic">verrassingen.</span>
+              </h2>
+              <p className="mt-6 text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+                Een externe consultancy rekent voor hetzelfde traject doorgaans
+                €8.000–€15.000. Wij leveren dezelfde deliverables in één werkdag.
+              </p>
+
+              <dl className="mt-10 space-y-3 text-sm">
+                <div className="flex items-center justify-between border-b border-dashed border-[var(--color-border)] pb-3">
+                  <dt className="text-[var(--color-ink-muted)]">Externe consultancy</dt>
+                  <dd className="font-mono text-[var(--color-ink-soft)] line-through">
+                    €8.000–€15.000
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between border-b border-dashed border-[var(--color-border)] pb-3">
+                  <dt className="text-[var(--color-ink-muted)]">Cursus per persoon × team</dt>
+                  <dd className="font-mono text-[var(--color-ink-soft)] line-through">
+                    €4.000+
+                  </dd>
+                </div>
+                <div className="flex items-center justify-between pt-1">
+                  <dt className="font-medium text-[var(--color-ink)]">
+                    Onze in-company workshop
+                  </dt>
+                  <dd className="font-display text-lg font-semibold text-[var(--color-accent)]">
+                    €1.495
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <div className="md:col-span-7">
+              <div className="relative rounded-[var(--radius-card)] border border-[var(--color-ink)] bg-white p-10 shadow-[var(--shadow-elev)]">
+                <span className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-[var(--color-ink)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white">
+                  In-company workshop
+                </span>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-display text-6xl font-semibold tracking-tight">
+                    €1.495
+                  </span>
+                  <span className="text-sm text-[var(--color-ink-soft)]">excl. btw</span>
+                </div>
+                <p className="mt-3 text-sm text-[var(--color-ink-muted)]">
+                  Eén volle werkdag · tot 12 deelnemers · op uw locatie of online
+                </p>
+
+                <ul className="mt-8 grid gap-3 text-sm md:grid-cols-2">
+                  {[
+                    "Werkdag 09:00 – 16:30",
+                    "Volledig AI-register, ingevuld",
+                    "Risico-classificatie per systeem",
+                    "30/60/90-dagen actieplan",
+                    "AI-geletterdheid plan (Art. 4)",
+                    "Certificaat per deelnemer",
+                    "Templates voor beleid + procedures",
+                    "30 dagen e-mailondersteuning",
+                    "Slide-deck (uw huisstijl)",
+                    "Lunch en materialen",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-[var(--color-ink-muted)]"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-1 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]"
+                      >
+                        ✓
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#contact"
+                  className="mt-10 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-ink)] px-6 py-4 text-sm font-medium text-white transition hover:-translate-y-px hover:bg-[var(--color-accent-hover)]"
+                >
+                  Plan een workshop
+                  <span aria-hidden>→</span>
+                </a>
+                <p className="mt-4 text-center text-xs text-[var(--color-ink-soft)]">
+                  Mogelijk subsidie via SLIM (€1.000–€2.500 cofinanciering).
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" className="border-b border-zinc-200">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="grid gap-12 md:grid-cols-2">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-emerald-700">
+      {/* FAQ */}
+      <section
+        id="veelgestelde-vragen"
+        className="border-b border-[var(--color-border)] bg-[var(--color-surface-2)]/40"
+      >
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="grid gap-12 md:grid-cols-12">
+            <div className="md:col-span-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                Veelgestelde vragen
+              </p>
+              <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+                Wat u waarschijnlijk wilt <span className="font-serif-italic">weten.</span>
+              </h2>
+            </div>
+            <div className="md:col-span-8">
+              <dl className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+                {faqs.map((f) => (
+                  <details
+                    key={f.q}
+                    className="group py-6 [&_summary::-webkit-details-marker]:hidden"
+                  >
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
+                      <dt className="font-display text-lg font-medium tracking-tight">
+                        {f.q}
+                      </dt>
+                      <span
+                        aria-hidden
+                        className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-[var(--color-border-strong)] text-[var(--color-ink-muted)] transition group-open:rotate-45 group-open:border-[var(--color-accent)] group-open:bg-[var(--color-accent-soft)] group-open:text-[var(--color-accent)]"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <dd className="mt-4 max-w-3xl text-[1rem] leading-relaxed text-[var(--color-ink-muted)]">
+                      {f.a}
+                    </dd>
+                  </details>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA + FORM */}
+      <section id="contact" className="border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="grid gap-16 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-accent)]">
                 Plan een workshop
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-                Een werkdag is genoeg. Een mail kost u &eacute;&eacute;n minuut.
+              <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+                Eén werkdag is <span className="font-serif-italic">genoeg.</span>
               </h2>
-              <p className="mt-6 text-zinc-600">
-                Stuur uw bedrijfsnaam, het aantal deelnemers en een datumvoorkeur. U
-                ontvangt binnen &eacute;&eacute;n werkdag een bevestiging met agenda en factuur.
+              <p className="mt-6 text-[1.0625rem] leading-relaxed text-[var(--color-ink-muted)]">
+                Stuur uw bedrijfsnaam en een datumvoorkeur. U ontvangt binnen één werkdag
+                een bevestiging met agenda en factuur.
               </p>
-              <div className="mt-8 space-y-2 text-sm text-zinc-700">
-                <p><span className="font-medium text-zinc-900">E-mail:</span> info@ai-verordening.nl</p>
-                <p><span className="font-medium text-zinc-900">Telefoon:</span> beschikbaar na contact</p>
+              <div className="mt-10 space-y-2 text-sm text-[var(--color-ink-muted)]">
+                <p>
+                  <span className="font-medium text-[var(--color-ink)]">E-mail:</span>{" "}
+                  info@aiverordening.eu
+                </p>
+                <p>
+                  <span className="font-medium text-[var(--color-ink)]">Reactietijd:</span>{" "}
+                  binnen één werkdag
+                </p>
               </div>
             </div>
+
             <form
-              action="https://formspree.io/f/your-form-id"
+              name="workshop-aanvraag"
               method="POST"
-              className="rounded-lg border border-zinc-200 bg-white p-8"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              className="md:col-span-7 rounded-[var(--radius-card)] border border-[var(--color-border)] bg-white p-8 shadow-[var(--shadow-card)]"
             >
-              <div className="space-y-4">
+              <input type="hidden" name="form-name" value="workshop-aanvraag" />
+              <p className="hidden">
+                <label>
+                  Niet invullen: <input name="bot-field" />
+                </label>
+              </p>
+
+              <div className="grid gap-5">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-900">Bedrijfsnaam</label>
+                  <label
+                    htmlFor="naam"
+                    className="block text-xs font-medium uppercase tracking-wider text-[var(--color-ink-soft)]"
+                  >
+                    Uw naam
+                  </label>
                   <input
-                    name="bedrijf"
-                    required
-                    className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-zinc-900">Uw naam</label>
-                  <input
+                    id="naam"
                     name="naam"
                     required
-                    className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+                    autoComplete="name"
+                    className="mt-2 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-3 text-sm focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-ring)]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-zinc-900">E-mail</label>
+                  <label
+                    htmlFor="bedrijf"
+                    className="block text-xs font-medium uppercase tracking-wider text-[var(--color-ink-soft)]"
+                  >
+                    Bedrijf
+                  </label>
                   <input
-                    type="email"
-                    name="email"
+                    id="bedrijf"
+                    name="bedrijf"
                     required
-                    className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+                    autoComplete="organization"
+                    className="mt-2 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-3 text-sm focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-ring)]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-zinc-900">Aantal deelnemers</label>
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-medium uppercase tracking-wider text-[var(--color-ink-soft)]"
+                  >
+                    Zakelijk e-mailadres
+                  </label>
                   <input
-                    name="deelnemers"
-                    type="number"
-                    min={1}
-                    max={20}
-                    className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    className="mt-2 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-3 text-sm focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-ring)]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-zinc-900">Bericht (optioneel)</label>
+                  <label
+                    htmlFor="bericht"
+                    className="block text-xs font-medium uppercase tracking-wider text-[var(--color-ink-soft)]"
+                  >
+                    Voorkeursdatum of vraag (optioneel)
+                  </label>
                   <textarea
+                    id="bericht"
                     name="bericht"
                     rows={3}
-                    className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+                    className="mt-2 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-3 text-sm focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-ring)]"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-md bg-zinc-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-zinc-800"
+                  className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-ink)] px-6 py-4 text-sm font-medium text-white transition hover:-translate-y-px hover:bg-[var(--color-accent-hover)]"
                 >
                   Verstuur aanvraag
+                  <span aria-hidden>→</span>
                 </button>
+                <p className="text-center text-xs text-[var(--color-ink-soft)]">
+                  Wij reageren binnen één werkdag. Geen verkoop-spam.
+                </p>
               </div>
             </form>
           </div>
         </div>
       </section>
 
-      <footer className="bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
-          <p>&copy; {new Date().getFullYear()} AI-verordening.nl &mdash; praktische AI-compliance voor het MKB.</p>
-          <p>EU AI Act &middot; Verordening (EU) 2024/1689</p>
+      {/* FOOTER */}
+      <footer className="bg-[var(--color-canvas)]">
+        <div className="mx-auto max-w-6xl px-6 py-10">
+          <div className="flex flex-col items-start justify-between gap-4 border-t border-[var(--color-border)] pt-8 text-sm text-[var(--color-ink-soft)] md:flex-row md:items-center">
+            <div>
+              <p className="font-display font-semibold text-[var(--color-ink)]">
+                AI Verordening
+              </p>
+              <p className="mt-1">
+                Praktische AI-compliance voor het Nederlandse MKB.
+              </p>
+            </div>
+            <div className="md:text-right">
+              <p>Verordening (EU) 2024/1689 · EU AI Act</p>
+              <p className="mt-1">© {new Date().getFullYear()} aiverordening.eu</p>
+            </div>
+          </div>
         </div>
       </footer>
+
+      {/* Mobile sticky CTA */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--color-border)] bg-white/95 px-4 py-3 backdrop-blur md:hidden">
+        <a
+          href="#contact"
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-medium text-white"
+        >
+          Plan workshop · €1.495
+        </a>
+      </div>
     </div>
   );
 }
