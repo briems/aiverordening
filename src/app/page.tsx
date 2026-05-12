@@ -659,12 +659,12 @@ export default function Page() {
             <form
               name="workshop-aanvraag"
               method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
+              action="/?success=1"
+              encType="application/x-www-form-urlencoded"
               className="md:col-span-7 rounded-[var(--radius-card)] border border-[var(--color-border)] bg-white p-8 shadow-[var(--shadow-card)]"
             >
               <input type="hidden" name="form-name" value="workshop-aanvraag" />
-              <p className="hidden">
+              <p className="hidden" aria-hidden>
                 <label>
                   Niet invullen: <input name="bot-field" />
                 </label>
